@@ -1,3 +1,4 @@
+# https://github.com/netology-code/dj-homeworks/tree/video/1.1-first-project
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
 import os
