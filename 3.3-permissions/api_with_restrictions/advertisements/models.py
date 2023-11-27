@@ -12,7 +12,7 @@ class AdvertisementStatusChoices(models.TextChoices):
 class Advertisement(models.Model):
     """Объявление."""
 
-    title = models.TextField()
+    title = models.TextField(verbose_name='Название')
     description = models.TextField(default='')
     status = models.TextField(
         choices=AdvertisementStatusChoices.choices,
@@ -28,3 +28,10 @@ class Advertisement(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True
     )
+    class Meta:
+        verbose_name = 'Объявление'
+        verbose_name_plural = 'Объявления'
+        ordering = ['-created_at']
+
+    def __str__(self) -> str:
+        return self.title
