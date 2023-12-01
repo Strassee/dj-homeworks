@@ -22,12 +22,12 @@ Authorization: Token 9205569ccc96df5e520585110e6d73bfb26bea3f
 ###
 
 # попытка поменять объявление
-PATCH {{baseUrl}}/advertisements/13/
+PATCH {{baseUrl}}/advertisements/17/
 Content-Type: application/json
 Authorization: Token 9205569ccc96df5e520585110e6d73bfb26bea3f
 
 {
-  "status": "CLOSED"
+    "status": "OPEN"
 }
 ###
 
