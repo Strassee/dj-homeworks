@@ -32,12 +32,13 @@ def test_first_course(client, courses_factory):
     course = courses_factory(_quantity=1)
 
     # Act
-    response = client.get('/api/v1/courses/')
+    response = client.get(f'/api/v1/courses/{course[0].id}/')
 
     # Assert
     data = response.json()
     assert response.status_code == 200
-    assert data[0]['id'] == course[0].id
+    assert data['id'] == course[0].id
+    assert data['name'] == course[0].name
 
 @pytest.mark.django_db
 def test_courses(client, courses_factory):
@@ -52,6 +53,7 @@ def test_courses(client, courses_factory):
     data = response.json()
     for i, c in enumerate(data):
         assert c['id'] == courses[i].id
+        assert c['name'] == courses[i].name
 
 @pytest.mark.django_db
 def test_filter_id_courses(client, courses_factory):
@@ -63,8 +65,10 @@ def test_filter_id_courses(client, courses_factory):
 
     # Assert
     data = response.json()
+    print(data)
     assert response.status_code == 200
     assert data[0]['id'] == courses[3].id
+    assert data[0]['name'] == courses[3].name
 
 @pytest.mark.django_db
 def test_filter_name_courses(client, courses_factory):
@@ -76,6 +80,7 @@ def test_filter_name_courses(client, courses_factory):
     # Assert
     data = response.json()
     assert response.status_code == 200
+    assert data[0]['id'] == courses[7].id
     assert data[0]['name'] == courses[7].name
 
 @pytest.mark.django_db
@@ -94,6 +99,7 @@ def test_update_courses(client, courses_factory):
     response = client.patch(f'/api/v1/courses/{courses[7].id}/', data={'name': new_name})
     data = response.json()
     assert response.status_code == 200
+    assert data['id'] == courses[7].id
     assert data['name'] == new_name
 
 @pytest.mark.django_db
